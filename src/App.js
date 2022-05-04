@@ -106,17 +106,17 @@ function Forside() {
       <div className="row">
         <div className="col">
           <Link to="/chat">
-            <img src={logo2} className="img-fluid" style={{ width: 200 }} />
+            <img src={logo2} className="img-fluid" style={{ width: 350 }} />
           </Link>
         </div>
         <div className="col">
           <Link to="/pagethree">
-            <img src={logo3} className="img-fluid" style={{ width: 200 }} />
+            <img src={logo3} className="img-fluid" style={{ width: 350 }} />
           </Link>
         </div>
         <div className="col">
           <Link to="/profil">
-            <img src={logo4} className="img-fluid" style={{ width: 200 }} />
+            <img src={logo4} className="img-fluid" style={{ width: 350 }} />
           </Link>
         </div>
       </div>
