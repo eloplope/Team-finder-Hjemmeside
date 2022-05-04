@@ -1,0 +1,18 @@
+.btn-xxl {
+    font-size: 3rem;
+    padding: 1rem 1.5rem;
+}
+
+.btn-forsideet {
+    background-color: purple;
+    color: white;
+}
+
+.btn-forsideto {
+    background-color: rgb(156, 95, 156);
+    color: white;
+}
+
+.navItem {
+    color: rgb(132, 15, 15);
+}
