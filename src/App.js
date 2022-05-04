@@ -18,6 +18,7 @@ import RangeSlider from "react-bootstrap/FormRange";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
+import SignIn from './SignIn';
 import './App.css';
 import './styles.css';
 
@@ -31,6 +32,7 @@ function App() {
     <Routes>
       <Route path="/*" element={<Layout />}>
         <Route path="" element={<Forside />} />
+        <Route path="signin" element={<SignIn />} />
         <Route path="forside" element={<Forside />} />
         <Route path="chat" element={<Chat />} />
         <Route path="pagethree" element={<PageThree />} />
@@ -180,13 +182,6 @@ function Profil() {
 
   );
 
-}
-
-function SignIn() {
-
-  return (
-    <></>
-  );
 }
 
 

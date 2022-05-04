@@ -4,6 +4,34 @@ import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+import {
+    getDocs,
+    getFirestore,
+    limit,
+    query,
+    serverTimestamp,
+    collection,
+    addDoc,
+    getDoc,
+    doc,
+    orderBy,
+    updateDoc
+  } from "firebase/firestore";
+  
+  
+  import {
+    getAuth,
+    FacebookAuthProvider,
+    GoogleAuthProvider,
+    TwitterAuthProvider,
+    signInWithRedirect,
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    signOut
+  } from "firebase/auth";
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -19,3 +47,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+export default signInWithEmailAndPassword
