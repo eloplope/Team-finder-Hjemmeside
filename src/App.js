@@ -56,7 +56,8 @@ function Menu() {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <LinkContainer to="/"><Navbar.Brand>Team-Finder</Navbar.Brand></LinkContainer>
-        <img src={logoteam} className="img-fluid img-thumbnail" alt="" width="250" height="40" className="d-inline-block align-text-top"></img>
+        <img src={logoteam} className="img-fluid " alt="" width="250" height="40"></img>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
