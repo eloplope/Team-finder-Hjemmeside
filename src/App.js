@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import logo2 from './chaat.png';
 import logo3 from './controoler.png';
 import logo4 from './profilimg.png';
+import logoteam from './teamlogo.png';
 import React from 'react';
 import {
   Outlet,
@@ -23,13 +24,15 @@ import './styles.css';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
+
+
 function App() {
   return (
     <Routes>
       <Route path="/*" element={<Layout />}>
-        <Route path="" element={<PageOne />} />
-        <Route path="pageone" element={<PageOne />} />
-        <Route path="pagetwo" element={<PageTwo />} />
+        <Route path="" element={<Forside />} />
+        <Route path="forside" element={<Forside />} />
+        <Route path="chat" element={<Chat />} />
         <Route path="pagethree" element={<PageThree />} />
         <Route path="profil" element={<Profil />} />
         <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
@@ -53,11 +56,12 @@ function Menu() {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <LinkContainer to="/"><Navbar.Brand>Team-Finder</Navbar.Brand></LinkContainer>
+        <img src={logoteam} className="img-fluid img-thumbnail" alt="" width="250" height="40" className="d-inline-block align-text-top"></img>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <LinkContainer to="/pageone"><Nav.Link>Menu</Nav.Link></LinkContainer>
-            <LinkContainer to="/pagetwo"><Nav.Link>Chat</Nav.Link></LinkContainer>
+            <LinkContainer to="/forside"><Nav.Link>Menu</Nav.Link></LinkContainer>
+            <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
             <LinkContainer to="/pagethree"><Nav.Link>Find</Nav.Link></LinkContainer>
             <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
           </Nav>
@@ -95,24 +99,24 @@ const handleClick = () => {
 
 };
 
-function PageOne() {
+function Forside() {
   return (
     <>
       <h1>Vælg hvad du vil</h1>
       <div className="row">
         <div className="col">
-          <Link to="/pagetwo">
-            <img src={logo2} className="img-fluid img-thumbnail" />
+          <Link to="/chat">
+            <img src={logo2} className="img-fluid" style={{ width: 200 }} />
           </Link>
         </div>
         <div className="col">
           <Link to="/pagethree">
-            <img src={logo3} className="img-fluid img-thumbnail" />
+            <img src={logo3} className="img-fluid" style={{ width: 200 }} />
           </Link>
         </div>
         <div className="col">
           <Link to="/profil">
-            <img src={logo4} className="img-fluid img-thumbnail" />
+            <img src={logo4} className="img-fluid" style={{ width: 200 }} />
           </Link>
         </div>
       </div>
@@ -122,7 +126,7 @@ function PageOne() {
   );
 }
 
-function PageTwo() {
+function Chat() {
   return (
     <h1>Chat</h1>
   );
@@ -138,8 +142,8 @@ function PageThree() {
 function Profil() {
   return (
     <>
-      <h2>Profil</h2>
-      <h2>Rediger dine oplysninger</h2>
+      <br></br>
+      <h2>Rediger dine profil oplysninger</h2>
       <div style={{ maxWidth: 400 }}>
         <div className="mb-3">
           <label className="form-label">Navn:</label>
@@ -177,6 +181,12 @@ function Profil() {
 
 }
 
+function SignIn() {
+
+  return (
+    <></>
+  );
+}
 
 
 export default App;
