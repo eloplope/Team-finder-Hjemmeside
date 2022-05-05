@@ -55,15 +55,15 @@ function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <LinkContainer to="/"><Navbar.Brand>Team-Finder</Navbar.Brand></LinkContainer>
-        <img src={logoteam} className="img-fluid " alt="" width="250" height="40"></img>
-
+        <Link to="/forside">
+          <img src={logoteam} className="img-fluid " alt="" width="320" height="60"></img>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <LinkContainer to="/forside"><Nav.Link>Menu</Nav.Link></LinkContainer>
             <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-            <LinkContainer to="/pagethree"><Nav.Link>Find</Nav.Link></LinkContainer>
+            <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
             <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
           </Nav>
         </Navbar.Collapse>
@@ -104,21 +104,24 @@ function Forside() {
   return (
     <>
       <h1>Vælg hvad du vil</h1>
-      <div className="row">
+      <div className="row text-center">
         <div className="col">
           <Link to="/chat">
             <img src={logo2} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Chat</h1>
         </div>
         <div className="col">
           <Link to="/pagethree">
             <img src={logo3} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Finder</h1>
         </div>
         <div className="col">
           <Link to="/profil">
             <img src={logo4} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Profil</h1>
         </div>
       </div>
 
@@ -129,13 +132,20 @@ function Forside() {
 
 function Chat() {
   return (
-    <h1>Chat</h1>
+    <>
+      <h1>Chat</h1>
+      <div className="mb-3 ">
+        <textarea className="form-control pull-right" id="exampleFormControlTextarea1" placeholder="Din besked" rows="3"></textarea>
+      </div>
+
+
+    </>
   );
 }
 
 function PageThree() {
   return (
-    <h1>Find</h1>
+    <h1>Finder</h1>
   );
 
 }
