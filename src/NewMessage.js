@@ -6,7 +6,7 @@ function NewMessage() {
         event.preventDefault();
         let formData = new FormData(event.currentTarget);
         let content = formData.get('content');
-        createMessage(content, "Author");
+        createMessage(content, authProvider.user.displayName);
     }
 
     return (

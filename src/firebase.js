@@ -1,18 +1,14 @@
 // Import the functions you need from the SDKs you need
-import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, serverTimestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { collection, addDoc, query, limit, orderBy, getDocs } from "firebase/firestore";
+import { where, onSnapshot } from "firebase/firestore";
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-import {
-  serverTimestamp,
-  collection,
-  addDoc
-} from "firebase/firestore";
+
+
 
 import {
   FacebookAuthProvider,
@@ -37,8 +33,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+function convertTimestamp(timestamp) {
+  let date = timestamp.toDate();
+  let mm = date.getMonth() + 1;
+  let dd = date.getDate();
+  let yyyy = date.getFullYear();
+
+  date = dd + '/' + mm + '/' + yyyy;
+  return date;
+}
 
 const authProvider = {
   isAuthenticated: false,
@@ -90,47 +96,48 @@ async function twitter() {
   await signInWithRedirect(auth, provider);
 }
 
-function tilføjTest() {
-  // Add a new document in collection "cities"
-  console.log("Er vi her?");
-  db.collection("cities").doc("LA").set({
-    name: "Los Angeles",
-    state: "CA",
-    country: "USA"
-  })
-    .then(() => {
-      console.log("Document successfully written!");
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
+async function createMessage(message, author) {
+  try {
+    const docRef = await addDoc(collection(db, "messages"), {
+      message: message,
+      author: author,
+      createdAt: serverTimestamp()
     });
+    console.log("Et dokument blev skrevet til db. Dokumentet har id: ", docRef.id);
+  } catch (e) {
+    console.error("Fejl ved skrivning til db: ", e);
+  }
 }
 
-function createMessage(message, author) {
-  try {
-    console.log("Vi skriver en besked til db", message, author);
-    if (message == null) throw new Error("Titel er tom!");
-
-    const messages = collection(db, "messages");
-
-    tilføjTest();
-
-    const docRef = addDoc(messages, {
-      author: author,
-      message: message,
-      createdAt: serverTimestamp()
-    }).then(res => {
-      console.log("Et dokument blev skrevet til db. Dokument havde id: ", docRef.id);
-    }).catch(e => {
-      console.error("Fejl opstod da dokument skulle oprettes: ", e);
+function createSnapshotHandler() {
+  const q = query(collection(db, "messages"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const docs = [];
+    querySnapshot.forEach((doc) => {
+      docs.push(doc.data().name);
     });
+    console.log("Current cities in CA: ", docs.join(", "));
+  });
+
+}
+
+async function getMessages(dataList, setDataList) {
+  try {
+    const messages = collection(db, "messages");
+    const q = query(messages, limit(10), orderBy('createdAt', 'desc'));
+
+    const data = await getDocs(q);
+    const tmp = data.docs.map((doc) => ({
+      id: doc.id,
+      message: doc.data().message,
+      createdAt: convertTimestamp(doc.data().createdAt),
+    }));
+    setDataList(tmp);
   }
   catch (e) {
-    console.log("Noget gik galt!", e);
+    console.log("Noget gik galt, da vi hentede messages.");
   }
-}
 
-function getMessages() {
 }
 
 
@@ -140,5 +147,6 @@ export {
   facebook,
   twitter,
   signIn,
-  createMessage
+  createMessage,
+  getMessages
 }

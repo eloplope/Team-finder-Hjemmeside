@@ -1,4 +1,5 @@
 import  NewMessage from "./NewMessage";
+import ShowMessages from './ShowMessages';
 
 
 function Chat() {
@@ -8,6 +9,7 @@ function Chat() {
     <>
       <h1>Chat</h1>
       <NewMessage></NewMessage>
+      <ShowMessages></ShowMessages>
 
     </>
   );
