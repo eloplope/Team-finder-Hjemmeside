@@ -1,16 +1,6 @@
 import SignInForm from "./SignInForm";
+import {google, facebook, twitter} from "./firebase";
 
-function twitter() {
-
-}
-
-function facebook() {
-
-}
-
-function google() {
-
-}
 
 function SignIn(props) {
     return (
@@ -22,7 +12,6 @@ function SignIn(props) {
                 <ul className="lead">
                     <li>Find your gamer friends</li>
                     <li>Chat with them</li>
-                    <li>??</li>
                 </ul>
             </div>
             <div className="col-4 align-self-center">

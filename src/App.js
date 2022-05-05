@@ -3,12 +3,14 @@ import logo2 from './chaat.png';
 import logo3 from './controoler.png';
 import logo4 from './profilimg.png';
 import logoteam from './teamlogo.png';
-import React from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   Outlet,
   Route,
   Routes,
-  Link
+  Link,
+  useLocation,
+  Navigate
 } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -19,27 +21,62 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import SignIn from './SignIn';
+import Recover from './Recover';
+import { authProvider } from './firebase';
 import './App.css';
 import './styles.css';
 
 
 import { LinkContainer } from 'react-router-bootstrap';
 
+let AuthContext = createContext({ user: undefined, setUser: undefined });
+
+function RequireAuth(inner) {
+  const location = useLocation();
+
+  
+  let {user, setUser} = useContext(AuthContext);  
+  console.log("Vi er i RequireAuth!", location.pathname, user);
+  
+  if (user === null && location.pathname !== '/signin') {
+    return <Navigate to="/signin" replace />;
+  }
+  if (user !== null && location.pathname === '/signin') {
+    // console.log("vi er på vej til signin og er logget ind. Videresend til dashboard.");
+    return <Navigate to="/forside" replace />;
+  }
+  
+  return inner.children;
+}
+
+function AuthProvider(inner) {
+
+  let [user, setUser] = useState({});
+
+  useEffect(()=>{
+    authProvider.firebaseSetup(user, setUser);
+  }, []);
+
+  return <AuthContext.Provider value={{ user, setUser }}>{inner.children}</AuthContext.Provider>;
+}
 
 
 function App() {
   return (
+    <AuthProvider>
     <Routes>
       <Route path="/*" element={<Layout />}>
         <Route path="" element={<Forside />} />
         <Route path="signin" element={<SignIn />} />
+        <Route path="recover" element={<Recover />} />
         <Route path="forside" element={<Forside />} />
-        <Route path="chat" element={<Chat />} />
-        <Route path="pagethree" element={<PageThree />} />
-        <Route path="profil" element={<Profil />} />
+        <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
+        <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
+        <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
         <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
       </Route>
     </Routes>
+    </AuthProvider>
   );
 }
 
@@ -53,12 +90,13 @@ function Layout() {
     </>);
 }
 
+//<img src={logoteam} className="img-fluid " alt="" width="250" height="40"></img>
 function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <LinkContainer to="/"><Navbar.Brand>Team-Finder</Navbar.Brand></LinkContainer>
-        <img src={logoteam} className="img-fluid " alt="" width="250" height="40"></img>
+        
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">

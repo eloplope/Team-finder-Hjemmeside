@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import  signInWithEmailPassword from "./firebase";
+import { signIn } from "./firebase";
 
 function SignInForm() {
 
@@ -9,7 +9,7 @@ function SignInForm() {
         let formData = new FormData(event.currentTarget);
         let email = formData.get('email');
         let password = formData.get('password');
-        signInWithEmailPassword(email, password);
+        signIn(email, password);
     }
 
     function checked() {
