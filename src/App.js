@@ -6,6 +6,7 @@ import maximg from './maximg.jpg';
 import maxto from './maxto.jpg';
 import davidet from './davidet.jpg';
 import davidto from './Davidto.jpg';
+import davidtre from './Davidtre.png';
 import billedtre from './billedtre.png';
 import jatak from './jatak.png';
 import nejtak from './nejtak.png';
@@ -176,7 +177,7 @@ function PageThree() {
           <img src={davidet} className="img-fluid" style={{ width: 250 }} />
         </div>
         <div className="col">
-          <img src={billedtre} className="img-fluid" style={{ width: 200 }} />
+          <img src={davidtre} className="img-fluid" style={{ width: 200 }} />
         </div>
       </div>
       <div className='text-center'>
@@ -256,6 +257,40 @@ function Profil() {
           </div>
           <div className="d-grid">
             <button className="btn btn-primary" type="button">Skift billeder</button>
+          </div>
+          <br></br>
+          <h2>Vælg dine yndlingsspil</h2>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+            <label class="form-check-label" for="inlineCheckbox1">League of Legends</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox2">Counter Strike</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox3">Valorant</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox4">Fortnite</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox5">Rocket League</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox6">World of Warcraft</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox7">Battlefield 2042</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox8">Call of Duty</label>
           </div>
         </div>
       </div>
