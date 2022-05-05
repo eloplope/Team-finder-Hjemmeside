@@ -23,6 +23,7 @@ import Form from "react-bootstrap/Form";
 import SignIn from './SignIn';
 import Recover from './Recover';
 import { authProvider } from './firebase';
+import Chat from './Chat';
 import './App.css';
 import './styles.css';
 
@@ -36,7 +37,7 @@ function RequireAuth(inner) {
 
   
   let {user, setUser} = useContext(AuthContext);  
-  console.log("Vi er i RequireAuth!", location.pathname, user);
+  //console.log("Vi er i RequireAuth!", location.pathname, user);
   
   if (user === null && location.pathname !== '/signin') {
     return <Navigate to="/signin" replace />;
@@ -167,11 +168,7 @@ function Forside() {
   );
 }
 
-function Chat() {
-  return (
-    <h1>Chat</h1>
-  );
-}
+
 
 function PageThree() {
   return (
