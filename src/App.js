@@ -134,11 +134,25 @@ function Chat() {
   return (
     <>
       <h1>Chat</h1>
-      <div className="mb-3 ">
-        <textarea className="form-control pull-right" id="exampleFormControlTextarea1" placeholder="Din besked" rows="3"></textarea>
+      <div className="row align-items-end">
+        <div className="col ">
+          <h1>person 1</h1>
+          <h1>person 2</h1>
+          <h1>person 3</h1>
+          <h1>person 4</h1>
+          <h1>person 5</h1>
+          <h1>person 6</h1>
+          <h1>person 7</h1>
+          <h1>person 8</h1>
+          <h1>person 9</h1>
+          <h1>person 10</h1>
+        </div>
+        <div className="col ">
+          <div className="mb-3">
+            <textarea className="form-control" id="beskedfelt" placeholder="Din besked" rows="4"></textarea>
+          </div>
+        </div>
       </div>
-
-
     </>
   );
 }
