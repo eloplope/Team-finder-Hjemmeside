@@ -9,6 +9,7 @@ function ShowMessages() {
         return (
             <tr key={doc.id}>
                 <td>{index + 1}</td>
+                <td>{doc.author} </td>
                 <td>{doc.message} </td>
                 <td>{doc.createdAt}</td>
             </tr>

@@ -32,13 +32,16 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 function convertTimestamp(timestamp) {
-  let date = timestamp.toDate();
-  let mm = date.getMonth() + 1;
-  let dd = date.getDate();
-  let yyyy = date.getFullYear();
+  if (timestamp != null) {
+    let date = timestamp.toDate();
+    let mm = date.getMonth() + 1;
+    let dd = date.getDate();
+    let yyyy = date.getFullYear();
+    let clock = date.toLocaleTimeString();
 
-  date = dd + '/' + mm + '/' + yyyy;
-  return date;
+    date = dd + '/' + mm + '/' + yyyy + " " + clock;
+    return date;
+  }
 }
 
 const authProvider = {
@@ -93,10 +96,11 @@ async function twitter() {
 
 async function createMessage(message, author) {
   try {
+    const timestamp = serverTimestamp();
     const docRef = await addDoc(collection(db, "messages"), {
       message: message,
       author: author,
-      createdAt: serverTimestamp()
+      createdAt: timestamp
     });
     console.log("Et dokument blev skrevet til db. Dokumentet har id: ", docRef.id);
   } catch (e) {
@@ -105,8 +109,9 @@ async function createMessage(message, author) {
 }
 
 async function createSnapshotHandler(dataList, setDataList) {
+
   const messages = collection(db, "messages");
-  const q = query(messages,  orderBy('createdAt', 'desc'));
+  const q = query(messages, orderBy('createdAt', 'desc'));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
@@ -114,6 +119,7 @@ async function createSnapshotHandler(dataList, setDataList) {
       docs.push({
         id: doc.id,
         message: doc.data().message,
+        author: doc.data().author,
         createdAt: convertTimestamp(doc.data().createdAt)
       });
     });
