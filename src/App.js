@@ -2,6 +2,14 @@ import logo from './logo.svg';
 import logo2 from './chaat.png';
 import logo3 from './controoler.png';
 import logo4 from './profilimg.png';
+import maximg from './maximg.jpg';
+import maxto from './maxto.jpg';
+import davidet from './davidet.jpg';
+import davidto from './Davidto.jpg';
+import davidtre from './Davidtre.png';
+import billedtre from './billedtre.png';
+import jatak from './jatak.png';
+import nejtak from './nejtak.png';
 import logoteam from './teamlogo.png';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
@@ -96,15 +104,15 @@ function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <LinkContainer to="/"><Navbar.Brand>Team-Finder</Navbar.Brand></LinkContainer>
-        
-
+        <Link to="/forside">
+          <img src={logoteam} className="img-fluid " alt="" width="320" height="60"></img>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <LinkContainer to="/forside"><Nav.Link>Menu</Nav.Link></LinkContainer>
             <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-            <LinkContainer to="/pagethree"><Nav.Link>Find</Nav.Link></LinkContainer>
+            <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
             <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
           </Nav>
         </Navbar.Collapse>
@@ -145,21 +153,24 @@ function Forside() {
   return (
     <>
       <h1>Vælg hvad du vil</h1>
-      <div className="row">
+      <div className="row text-center">
         <div className="col">
           <Link to="/chat">
             <img src={logo2} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Chat</h1>
         </div>
         <div className="col">
           <Link to="/pagethree">
             <img src={logo3} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Finder</h1>
         </div>
         <div className="col">
           <Link to="/profil">
             <img src={logo4} className="img-fluid" style={{ width: 350 }} />
           </Link>
+          <h1>Profil</h1>
         </div>
       </div>
 
@@ -169,10 +180,42 @@ function Forside() {
 }
 
 
-
 function PageThree() {
   return (
-    <h1>Find</h1>
+    <>
+      <br></br>
+      <div className="row text-center">
+        <div className="col">
+          <img src={davidto} className="img-fluid" style={{ width: 200 }} />
+        </div>
+        <div className="col">
+          <img src={davidet} className="img-fluid" style={{ width: 250 }} />
+        </div>
+        <div className="col">
+          <img src={davidtre} className="img-fluid" style={{ width: 200 }} />
+        </div>
+      </div>
+      <div className='text-center'>
+        <h1>David Ulrich Simonsen 18</h1>
+      </div>
+      <div className="row text-center">
+        <div className="col text-right">
+          <br></br>
+        </div>
+        <div className="col text-right">
+          <img src={jatak} className="img-fluid" style={{ width: 200 }} />
+        </div>
+        <div className="col text-center">
+          <p>Hej mit navn er David. Jeg elsker Counter strike, og animee. Jeg er også meget glad for baguette og humus.</p>
+        </div>
+        <div className="col text-left">
+          <img src={nejtak} className="img-fluid" style={{ width: 200 }} />
+        </div>
+        <div className="col text-right">
+          <br></br>
+        </div>
+      </div>
+    </>
   );
 
 }
@@ -180,38 +223,91 @@ function PageThree() {
 function Profil() {
   return (
     <>
-      <br></br>
-      <h2>Rediger dine profil oplysninger</h2>
-      <div style={{ maxWidth: 400 }}>
-        <div className="mb-3">
-          <label className="form-label">Navn:</label>
-          <input type="name" className="form-control" id="exampleFormControlInput1" placeholder=" " />
-        </div>
-        <div>
-          <label className="form-label">Telefonnummer:</label>
-        </div>
-        <div className="input-group flex-nowrap">
-          <span className="input-group-text" id="addon-wrapping">45+</span>
-          <input type="text" className="form-control" placeholder="nummer" aria-label="phonenumber" aria-describedby="addon-wrapping" />
+      <div className="row text-left">
+        <br></br>
+        <h2>Rediger dine profil oplysninger</h2>
+        <div className="col">
+          <div style={{ maxWidth: 400 }}>
+            <div className="mb-3">
+              <label className="form-label">Navn:</label>
+              <input type="name" className="form-control" id="exampleFormControlInput1" placeholder=" " />
+            </div>
+            <div>
+              <label className="form-label">Telefonnummer:</label>
+            </div>
+            <div className="input-group flex-nowrap">
+              <span className="input-group-text" id="addon-wrapping">45+</span>
+              <input type="text" className="form-control" placeholder="nummer" aria-label="phonenumber" aria-describedby="addon-wrapping" />
 
-        </div>
-        <div className="mb-3">
-          <label className="form-label"><br></br>Alder:</label>
-          <SliderWithInputFormControl></SliderWithInputFormControl>
-        </div>
+            </div>
+            <div className="mb-3">
+              <label className="form-label"><br></br>Alder:</label>
+              <SliderWithInputFormControl></SliderWithInputFormControl>
+            </div>
 
-        <div className="mb-3">
-          <label className="form-label">Email addresse:</label>
-          <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+            <div className="mb-3">
+              <label className="form-label">Email addresse:</label>
+              <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Din biografi:</label>
+              <textarea className="form-control" id="exampleFormControlTextarea1" placeholder="Hej, mit navn er joe, jeg elsker spil." rows="3"></textarea>
+            </div>
+            <div className="d-grid gap-2">
+              <button className="btn btn-primary" type="button">Gem ændringer</button>
+            </div>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Din biografi:</label>
-          <textarea className="form-control" id="exampleFormControlTextarea1" placeholder="Hej, mit navn er joe, jeg elsker spil." rows="3"></textarea>
+        <div className="col">
+          <div className="row align-items-end">
+            <div className="col ">
+              <img src={maximg} className="img-fluid" style={{ width: 200 }} />
+            </div>
+            <div className="col ">
+              <img src={maxto} className="img-fluid" style={{ width: 200 }} />
+            </div>
+            <div className="col ">
+              <img src={billedtre} className="img-fluid" style={{ width: 200 }} />
+            </div>
+          </div>
+          <div className="d-grid">
+            <button className="btn btn-primary" type="button">Skift billeder</button>
+          </div>
+          <br></br>
+          <h2>Vælg dine yndlingsspil</h2>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+            <label class="form-check-label" for="inlineCheckbox1">League of Legends</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox2">Counter Strike</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox3">Valorant</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox4">Fortnite</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox5">Rocket League</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox6">World of Warcraft</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox7">Battlefield 2042</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox8">Call of Duty</label>
+          </div>
         </div>
-        <div className="d-grid gap-2">
-          <button className="btn btn-primary" type="button">Gem ændringer</button>
-        </div>
-
       </div>
     </>
 
