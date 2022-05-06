@@ -30,8 +30,9 @@ function ShowMessages() {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Message</th>
-                        <th>Created</th>
+                        <th>Forfatter</th>
+                        <th>Besked</th>
+                        <th>Tidspunkt</th>
                     </tr>
                 </thead>
                 <tbody>

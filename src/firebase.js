@@ -1,11 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { collection, addDoc, query, limit, orderBy, getDocs } from "firebase/firestore";
 import { where, onSnapshot } from "firebase/firestore";
 
 import {
+  getAuth,
+  signOut,
   FacebookAuthProvider,
   GoogleAuthProvider,
   TwitterAuthProvider,
@@ -14,8 +15,23 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+
+const firebaseConfigP = {
+  apiKey: "AIzaSyAoPgLuAFTqorFtDr3iEgyK9LrCXVFBrVc",
+  authDomain: "team-finder-dde6e.firebaseapp.com",
+  projectId: "team-finder-dde6e",
+  storageBucket: "team-finder-dde6e.appspot.com",
+  messagingSenderId: "841663490702",
+  appId: "1:841663490702:web:c22ad0b3cb6e0c745ef7df"
+};
+
+const app = initializeApp(firebaseConfigP);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyDWD9t0fcyx73fX8K6Gg3uEUrTJZ7TZj5U",
   authDomain: "team-finder-967e8.firebaseapp.com",
@@ -30,6 +46,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+*/
 
 function convertTimestamp(timestamp) {
   if (timestamp != null) {
@@ -146,6 +163,14 @@ async function getMessages(dataList, setDataList) {
 
 }
 
+function logout(callback){
+  signOut(auth).then(() => {
+    callback();
+    console.log("Vi er nu logget ud!");
+  }).catch((error) => {
+    console.log("Noget gik galt da vi loggede ud.");
+  });
+}
 
 export {
   authProvider,
@@ -155,5 +180,6 @@ export {
   signIn,
   createMessage,
   getMessages,
-  createSnapshotHandler
+  createSnapshotHandler,
+  logout
 }

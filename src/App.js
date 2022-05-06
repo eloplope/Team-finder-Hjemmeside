@@ -18,7 +18,8 @@ import {
   Routes,
   Link,
   useLocation,
-  Navigate
+  Navigate,
+  useNavigate
 } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -30,7 +31,7 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import SignIn from './SignIn';
 import Recover from './Recover';
-import { authProvider } from './firebase';
+import { authProvider, logout } from './firebase';
 import Chat from './Chat';
 import './App.css';
 import './styles.css';
@@ -79,6 +80,7 @@ function App() {
         <Route path="signin" element={<SignIn />} />
         <Route path="recover" element={<Recover />} />
         <Route path="forside" element={<Forside />} />
+        <Route path="logud" element={<Logud />} />
         <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
         <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
         <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
@@ -114,6 +116,7 @@ function Menu() {
             <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
             <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
             <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
+            <LinkContainer to="/logud"><Nav.Link>Log ud</Nav.Link></LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -179,6 +182,20 @@ function Forside() {
   );
 }
 
+function Logud(){
+  console.log("Er vi her?");
+  let navigate = useNavigate();
+
+
+  const callback = ()=>{
+    navigate("/forside");
+  };
+
+  logout(callback);
+
+
+
+}
 
 function PageThree() {
   return (
