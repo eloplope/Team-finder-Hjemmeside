@@ -1,16 +1,16 @@
 
-import { getMessages } from "./firebase";
+import { getMessages, createSnapshotHandler } from "./firebase";
 import { useEffect, useState } from "react";
 
 function ShowMessages() {
     const [dataList, setDataList] = useState([]);
 
-    const listItems = dataList.map((survey, index) => {
+    const listItems = dataList.map((doc, index) => {
         return (
-            <tr key={survey.id}>
+            <tr key={doc.id}>
                 <td>{index + 1}</td>
-                <td>{survey.message} </td>
-                <td>{survey.createdAt}</td>
+                <td>{doc.message} </td>
+                <td>{doc.createdAt}</td>
             </tr>
         );
     }
@@ -18,7 +18,8 @@ function ShowMessages() {
     );
 
     useEffect(() => {
-        getMessages(dataList, setDataList);
+        //getMessages(dataList, setDataList);
+        createSnapshotHandler(dataList, setDataList);
     }, []);
 
     return (

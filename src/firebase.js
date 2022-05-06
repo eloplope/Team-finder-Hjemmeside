@@ -5,11 +5,6 @@ import { getAuth } from "firebase/auth";
 import { collection, addDoc, query, limit, orderBy, getDocs } from "firebase/firestore";
 import { where, onSnapshot } from "firebase/firestore";
 
-
-
-
-
-
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
@@ -109,16 +104,21 @@ async function createMessage(message, author) {
   }
 }
 
-function createSnapshotHandler() {
-  const q = query(collection(db, "messages"));
+async function createSnapshotHandler(dataList, setDataList) {
+  const messages = collection(db, "messages");
+  const q = query(messages,  orderBy('createdAt', 'desc'));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
-      docs.push(doc.data().name);
+      //docs.push(doc.data().name);
+      docs.push({
+        id: doc.id,
+        message: doc.data().message,
+        createdAt: convertTimestamp(doc.data().createdAt)
+      });
     });
-    console.log("Current cities in CA: ", docs.join(", "));
+    setDataList(docs);
   });
-
 }
 
 async function getMessages(dataList, setDataList) {
@@ -148,5 +148,6 @@ export {
   twitter,
   signIn,
   createMessage,
-  getMessages
+  getMessages,
+  createSnapshotHandler
 }
