@@ -35,17 +35,19 @@ import { authProvider, logout } from './firebase';
 import Chat from './Chat';
 import './App.css';
 import './styles.css';
+import { Context } from "./Context.js";
 
 
 import { LinkContainer } from 'react-router-bootstrap';
 
 let AuthContext = createContext({ user: undefined, setUser: undefined });
-let UnsubscribeContext = createContext();
+
 
 
 function RequireAuth(inner) {
   const location = useLocation();
 
+  
 
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
@@ -64,17 +66,18 @@ function RequireAuth(inner) {
 function AuthProvider(inner) {
 
   let [user, setUser] = useState({});
+  const [context, setContext] = useState(null);
 
   useEffect(() => {
     authProvider.firebaseSetup(user, setUser);
   }, []);
 
 
-  return <UnsubscribeContext.Provider value={null}>
+  return <Context.Provider value={[context, setContext]}>
     <AuthContext.Provider value={{ user, setUser }}>
       {inner.children}
     </AuthContext.Provider>
-  </UnsubscribeContext.Provider>;
+  </Context.Provider>;
 }
 
 
@@ -190,6 +193,8 @@ function Forside() {
 }
 
 function Logud() {
+  const [context, setContext] = useContext(Context);
+  
   console.log("Er vi her?");
   let navigate = useNavigate();
 
@@ -199,8 +204,7 @@ function Logud() {
   };
 
   logout(callback);
-
-
+  //context();
 
 }
 

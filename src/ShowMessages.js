@@ -1,13 +1,12 @@
 
 import { getMessages, createSnapshotHandler } from "./firebase";
 import { useEffect, useState, useContext } from "react";
-
+import { Context } from "./Context";
 
 
 function ShowMessages() {
-
-    
     const [dataList, setDataList] = useState([]);
+    const [context, setContext] = useContext(Context);
 
     const listItems = dataList.map((doc, index) => {
         return (
@@ -24,7 +23,7 @@ function ShowMessages() {
 
     useEffect(() => {
         //getMessages(dataList, setDataList);
-        createSnapshotHandler(dataList, setDataList);
+        createSnapshotHandler(dataList, setDataList, setContext);
     }, []);
 
     return (
