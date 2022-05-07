@@ -125,7 +125,7 @@ async function createMessage(message, author) {
   }
 }
 
-async function createSnapshotHandler(dataList, setDataList) {
+async function createSnapshotHandler(dataList, setDataList, setUnsubscribeLogout) {
 
   const messages = collection(db, "messages");
   const q = query(messages, orderBy('createdAt', 'desc'));
@@ -141,6 +141,7 @@ async function createSnapshotHandler(dataList, setDataList) {
       });
     });
     setDataList(docs);
+    setUnsubscribeLogout(unsubscribe);
   });
 }
 

@@ -40,14 +40,16 @@ import './styles.css';
 import { LinkContainer } from 'react-router-bootstrap';
 
 let AuthContext = createContext({ user: undefined, setUser: undefined });
+let UnsubscribeContext = createContext();
+
 
 function RequireAuth(inner) {
   const location = useLocation();
 
-  
-  let {user, setUser} = useContext(AuthContext);  
+
+  let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
-  
+
   if (user === null && location.pathname !== '/signin') {
     return <Navigate to="/signin" replace />;
   }
@@ -55,7 +57,7 @@ function RequireAuth(inner) {
     // console.log("vi er på vej til signin og er logget ind. Videresend til dashboard.");
     return <Navigate to="/forside" replace />;
   }
-  
+
   return inner.children;
 }
 
@@ -63,30 +65,35 @@ function AuthProvider(inner) {
 
   let [user, setUser] = useState({});
 
-  useEffect(()=>{
+  useEffect(() => {
     authProvider.firebaseSetup(user, setUser);
   }, []);
 
-  return <AuthContext.Provider value={{ user, setUser }}>{inner.children}</AuthContext.Provider>;
+
+  return <UnsubscribeContext.Provider value={null}>
+    <AuthContext.Provider value={{ user, setUser }}>
+      {inner.children}
+    </AuthContext.Provider>
+  </UnsubscribeContext.Provider>;
 }
 
 
 function App() {
   return (
     <AuthProvider>
-    <Routes>
-      <Route path="/*" element={<Layout />}>
-        <Route path="" element={<Forside />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="recover" element={<Recover />} />
-        <Route path="forside" element={<Forside />} />
-        <Route path="logud" element={<Logud />} />
-        <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
-        <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
-        <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
-        <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path="/*" element={<Layout />}>
+          <Route path="" element={<Forside />} />
+          <Route path="signin" element={<RequireAuth><SignIn /></RequireAuth>} />
+          <Route path="recover" element={<Recover />} />
+          <Route path="forside" element={<Forside />} />
+          <Route path="logud" element={<Logud />} />
+          <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
+          <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
+          <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
+          <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
+        </Route>
+      </Routes>
     </AuthProvider>
   );
 }
@@ -182,12 +189,12 @@ function Forside() {
   );
 }
 
-function Logud(){
+function Logud() {
   console.log("Er vi her?");
   let navigate = useNavigate();
 
 
-  const callback = ()=>{
+  const callback = () => {
     navigate("/forside");
   };
 
