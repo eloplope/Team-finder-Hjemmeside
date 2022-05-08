@@ -69,13 +69,13 @@ const authProvider = {
   firebaseSetup: function (user, setUser) {
     if (authProvider.isAuthenticated === false) {
       this.isAuthenticated = true;
-      onAuthStateChanged(auth, res => {
+      return onAuthStateChanged(auth, res => {
         if (res) {
           this.user = res;
           this.uid = res.uid;
           this.setUser = setUser;
           setUser(res);
-          console.log("Så er vi logget ind.", res.displayName)
+          console.log("Så er vi logget ind.", res.displayName);
         }
         else {
           setUser(null);

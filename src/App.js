@@ -51,6 +51,10 @@ function AuthProvider(inner) {
   useEffect(() => {
     console.log("Opsætter firebase...");
     const unsubscribe = authProvider.firebaseSetup(user, setUser);
+    return (()=>{
+      authProvider.isAuthenticated = false;
+      unsubscribe();
+    });
   }, []);
 
 
