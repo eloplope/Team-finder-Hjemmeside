@@ -1,12 +1,18 @@
 
 import { createSnapshotHandler } from "./firebase";
-import { useEffect, useState, useContext } from "react";
-import { UnsubscribeContext } from "./Context";
+import { useEffect, useState } from "react";
 
 
 function ShowMessages() {
     const [dataList, setDataList] = useState([]);
-    const {unsubscribe, setUnsubscribe} = useContext(UnsubscribeContext);
+
+    useEffect(() => {
+        const unsubscribe = createSnapshotHandler(setDataList);
+        return () => {
+            console.log("Cleaning up...");
+            unsubscribe();
+        };
+    }, []);
 
     const listItems = dataList.map((doc, index) => {
         return (
@@ -18,13 +24,6 @@ function ShowMessages() {
             </tr>
         );
     });
-
-    useEffect(() => {
-        createSnapshotHandler(setDataList).then((u)=>{
-            setUnsubscribe(u);
-        })
-
-    }, [setUnsubscribe]);
 
     return (
         <>

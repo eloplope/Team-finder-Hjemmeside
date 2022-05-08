@@ -61,30 +61,20 @@ function convertTimestamp(timestamp) {
   }
 }
 
-const authProvider = {
-  isAuthenticated: false,
-  uid: "",
-  user: {},
-  setUser: null,
-  firebaseSetup: function (user, setUser) {
-    if (authProvider.isAuthenticated === false) {
-      this.isAuthenticated = true;
-      onAuthStateChanged(auth, res => {
-        if (res) {
-          this.user = res;
-          this.uid = res.uid;
-          this.setUser = setUser;
-          setUser(res);
-          console.log("Så er vi logget ind.", res.displayName)
-        }
-        else {
-          setUser(null);
-        }
-      });
-    }
-  }
-};
 
+async function firebaseSetup(user, setUser) {
+  onAuthStateChanged(auth, res => {
+    console.log("onAuthStateChanged kaldes nu.");
+    if (res) {
+      setUser(res);
+      console.log("Så er vi logget ind.", res.displayName)
+    }
+    else {
+      console.log("Noget gik galt da vi loggede ind.");
+      //setUser(null);
+    }
+  });
+}
 
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
@@ -125,7 +115,7 @@ async function createMessage(message, author) {
   }
 }
 
-async function createSnapshotHandler(setDataList) {
+function createSnapshotHandler(setDataList) {
   console.log("Vi opretter snapshotListener...");
 
   const messages = collection(db, "messages");
@@ -133,7 +123,6 @@ async function createSnapshotHandler(setDataList) {
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
-      console.log("Vi konverterer data til passende format.");
       docs.push({
         id: doc.id,
         message: doc.data().message,
@@ -141,7 +130,7 @@ async function createSnapshotHandler(setDataList) {
         createdAt: convertTimestamp(doc.data().createdAt)
       });
     });
-    setDataList(docs);    
+    setDataList(docs);
   });
   return unsubscribe;
 }
@@ -165,9 +154,8 @@ async function getMessages(setDataList) {
 
 }
 
-function logout(callback){
+function logout() {
   signOut(auth).then(() => {
-    callback();
     console.log("Vi er nu logget ud!");
   }).catch((error) => {
     console.log("Noget gik galt da vi loggede ud.");
@@ -175,7 +163,7 @@ function logout(callback){
 }
 
 export {
-  authProvider,
+  firebaseSetup,
   google,
   facebook,
   twitter,

@@ -17,19 +17,18 @@ import {
 import SignIn from './SignIn';
 import Recover from './Recover';
 import Forside from './Forside';
-import { authProvider } from './firebase';
+import { firebaseSetup } from './firebase';
 import Chat from './Chat';
 import Layout from './Layout';
 import Logud from './Logud';
 import Profil from './Profil';
 import './App.css';
 import './styles.css';
-import { UnsubscribeContext } from "./Context.js";
 import { AuthContext } from "./Context.js";
 
 
 function RequireAuth(inner) {
-  const location = useLocation();  
+  const location = useLocation();
 
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
@@ -48,18 +47,16 @@ function RequireAuth(inner) {
 function AuthProvider(inner) {
 
   let [user, setUser] = useState({});
-  const [context, setContext] = useState(null);
 
   useEffect(() => {
-    authProvider.firebaseSetup(user, setUser);
+    console.log("Opsætter firebase...");
+    const unsubscribe = firebaseSetup(user, setUser);
   }, []);
 
 
-  return <UnsubscribeContext.Provider value={[context, setContext]}>
-    <AuthContext.Provider value={{ user, setUser }}>
-      {inner.children}
-    </AuthContext.Provider>
-  </UnsubscribeContext.Provider>;
+  return <AuthContext.Provider value={{ user, setUser }}>
+    {inner.children}
+  </AuthContext.Provider>;
 }
 
 

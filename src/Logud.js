@@ -1,15 +1,15 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { UnsubscribeContext } from "./Context.js";
+
+
+import { logout } from "./firebase";
 
 function Logud() {
-    const [context, setContext] = React.useContext(UnsubscribeContext);
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
-    React.useEffect(() => {
+    useEffect(() => {
         navigate('/forside');        
-        //context(); // vi unsubscriber til snapshot Listener for at fejlbesked fra firebase.
-        //logout(callback);
+        logout();
     });
 
 }
