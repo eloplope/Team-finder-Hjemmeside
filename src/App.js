@@ -33,12 +33,12 @@ function RequireAuth(inner) {
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
 
-  if (user === null && location.pathname !== '/signin') {
+  if (user == null && location.pathname != '/signin') {
     return <Navigate to="/signin" replace />;
   }
-  if (user !== null && location.pathname === '/signin') {
+  if (user != null && location.pathname == '/signin') {
     // console.log("vi er på vej til signin og er logget ind. Videresend til dashboard.");
-    return <Navigate to="/forside" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return inner.children;
@@ -46,13 +46,12 @@ function RequireAuth(inner) {
 
 function AuthProvider(inner) {
 
-  let [user, setUser] = useState({});
+  let [user, setUser] = useState();
 
   useEffect(() => {
-    console.log("Opsætter firebase...");
+    console.log("Opsætter firebase...", user);
     const unsubscribe = authProvider.firebaseSetup(user, setUser);
     return (()=>{
-      authProvider.isAuthenticated = false;
       unsubscribe();
     });
   }, []);
@@ -72,7 +71,6 @@ function App() {
           <Route path="" element={<Forside />} />
           <Route path="signin" element={<RequireAuth><SignIn /></RequireAuth>} />
           <Route path="recover" element={<Recover />} />
-          <Route path="forside" element={<Forside />} />
           <Route path="logud" element={<Logud />} />
           <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
           <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />

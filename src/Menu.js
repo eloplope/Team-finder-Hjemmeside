@@ -9,13 +9,13 @@ function Menu() {
     return (
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Link to="/forside">
+          <Link to="/">
             <img src={logoteam} className="img-fluid " alt="" width="320" height="60"></img>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav>
-              <LinkContainer to="/forside"><Nav.Link>Menu</Nav.Link></LinkContainer>
+              <LinkContainer to="/"><Nav.Link>Menu</Nav.Link></LinkContainer>
               <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
               <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
               <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>

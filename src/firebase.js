@@ -62,30 +62,16 @@ function convertTimestamp(timestamp) {
 }
 
 const authProvider = {
-  isAuthenticated: false,
-  uid: "",
-  user: {},
-  setUser: null,
   firebaseSetup: function (user, setUser) {
-    if (authProvider.isAuthenticated === false) {
-      this.isAuthenticated = true;
-      return onAuthStateChanged(auth, res => {
-        if (res) {
-          this.user = res;
-          this.uid = res.uid;
-          this.setUser = setUser;
-          setUser(res);
-          console.log("Så er vi logget ind.", res.displayName);
-        }
-        else {
-          setUser(null);
-        }
-      });
-    }
+    let unsubscribe = onAuthStateChanged(auth, fbUser => {
+      if (fbUser) {
+        setUser(fbUser);
+        console.log("Så er vi logget ind.", fbUser.displayName);
+      }
+    }, (e)=>{console.log("åh ååh")});
+    return unsubscribe;
   }
 };
-
-
 
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
@@ -165,9 +151,10 @@ async function getMessages(setDataList) {
 
 }
 
-function logout() {
+function logout(user, setUser) {
   signOut(auth).then(() => {
     console.log("Vi er nu logget ud!");
+    setUser(null);
   }).catch((error) => {
     console.log("Noget gik galt da vi loggede ud.");
   });
