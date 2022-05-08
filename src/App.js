@@ -1,7 +1,3 @@
-import logo from './logo.svg';
-import logo2 from './chaat.png';
-import logo3 from './controoler.png';
-import logo4 from './profilimg.png';
 import maximg from './maximg.jpg';
 import maxto from './maxto.jpg';
 import davidet from './davidet.jpg';
@@ -10,38 +6,30 @@ import davidtre from './Davidtre.png';
 import billedtre from './billedtre.png';
 import jatak from './jatak.png';
 import nejtak from './nejtak.png';
-import logoteam from './teamlogo.png';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
-  Outlet,
   Route,
   Routes,
-  Link,
   useLocation,
-  Navigate,
-  useNavigate
+  Navigate
 } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+
+
 import RangeSlider from "react-bootstrap/FormRange";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import SignIn from './SignIn';
 import Recover from './Recover';
-import { authProvider, logout } from './firebase';
+import Forside from './Forside';
+import { authProvider } from './firebase';
 import Chat from './Chat';
+import Layout from './Layout';
+import Logud from './Logud';
 import './App.css';
 import './styles.css';
 import { Context } from "./Context.js";
-
-
-import { LinkContainer } from 'react-router-bootstrap';
-
-let AuthContext = createContext({ user: undefined, setUser: undefined });
-
+import { AuthContext } from "./Context.js";
 
 
 function RequireAuth(inner) {
@@ -99,39 +87,10 @@ function App() {
   );
 }
 
-function Layout() {
-  return (
-    <>
-      <Menu></Menu>
-      <Container>
-        <Outlet></Outlet>
-      </Container>
-    </>);
-}
 
-//<img src={logoteam} className="img-fluid " alt="" width="250" height="40"></img>
-function Menu() {
-  return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <Link to="/forside">
-          <img src={logoteam} className="img-fluid " alt="" width="320" height="60"></img>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav>
-            <LinkContainer to="/forside"><Nav.Link>Menu</Nav.Link></LinkContainer>
-            <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-            <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
-            <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
-            <LinkContainer to="/logud"><Nav.Link>Log ud</Nav.Link></LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
 
-}
+
+
 const SliderWithInputFormControl = () => {
 
   const [value, setValue] = React.useState(25);
@@ -155,61 +114,6 @@ const SliderWithInputFormControl = () => {
 
 };
 
-const handleClick = () => {
-  console.log("lmao klik klikety klik")
-
-};
-
-function Forside() {
-  return (
-    <>
-      <h1>Vælg hvad du vil</h1>
-      <div className="row text-center">
-        <div className="col">
-          <Link to="/chat">
-            <img src={logo2} className="img-fluid" style={{ width: 350 }} />
-          </Link>
-          <h1>Chat</h1>
-        </div>
-        <div className="col">
-          <Link to="/pagethree">
-            <img src={logo3} className="img-fluid" style={{ width: 350 }} />
-          </Link>
-          <h1>Finder</h1>
-        </div>
-        <div className="col">
-          <Link to="/profil">
-            <img src={logo4} className="img-fluid" style={{ width: 350 }} />
-          </Link>
-          <h1>Profil</h1>
-        </div>
-      </div>
-
-
-    </>
-  );
-}
-
-function Logud() {
-  const [context, setContext] = useContext(Context);
-  
-  console.log("Er vi her?");
-  let navigate = useNavigate();
-
-
-  const callback = () => {
-    navigate("/forside");
-  };
-
-  
-
-  useEffect(() => {
-    console.log("Vi logger permanent ud...");
-    //context(); // vi unsubscriber til snapshot Listener for at fejlbesked fra firebase.
-    //logout(callback);
-  }, []);
-
-}
 
 function PageThree() {
   return (
@@ -217,13 +121,13 @@ function PageThree() {
       <br></br>
       <div className="row text-center">
         <div className="col">
-          <img src={davidto} className="img-fluid" style={{ width: 200 }} />
+          <img src={davidto} className="img-fluid" style={{ width: 200 }} alt="" />
         </div>
         <div className="col">
-          <img src={davidet} className="img-fluid" style={{ width: 250 }} />
+          <img src={davidet} className="img-fluid" style={{ width: 250 }} alt="" />
         </div>
         <div className="col">
-          <img src={davidtre} className="img-fluid" style={{ width: 200 }} />
+          <img src={davidtre} className="img-fluid" style={{ width: 200 }} alt="" />
         </div>
       </div>
       <div className='text-center'>
@@ -234,13 +138,13 @@ function PageThree() {
           <br></br>
         </div>
         <div className="col text-right">
-          <img src={jatak} className="img-fluid" style={{ width: 200 }} />
+          <img src={jatak} className="img-fluid" style={{ width: 200 }} alt="" />
         </div>
         <div className="col text-center">
           <p>Hej mit navn er David. Jeg elsker Counter strike, og animee. Jeg er også meget glad for baguette og humus.</p>
         </div>
         <div className="col text-left">
-          <img src={nejtak} className="img-fluid" style={{ width: 200 }} />
+          <img src={nejtak} className="img-fluid" style={{ width: 200 }} alt="" />
         </div>
         <div className="col text-right">
           <br></br>
@@ -261,7 +165,7 @@ function Profil() {
           <div style={{ maxWidth: 400 }}>
             <div className="mb-3">
               <label className="form-label">Navn:</label>
-              <input type="name" className="form-control" id="exampleFormControlInput1" placeholder=" " />
+              <input type="name" className="form-control" placeholder=" " />
             </div>
             <div>
               <label className="form-label">Telefonnummer:</label>
@@ -292,13 +196,13 @@ function Profil() {
         <div className="col">
           <div className="row align-items-end">
             <div className="col ">
-              <img src={maximg} className="img-fluid" style={{ width: 200 }} />
+              <img src={maximg} className="img-fluid" style={{ width: 200 }} alt="" />
             </div>
             <div className="col ">
-              <img src={maxto} className="img-fluid" style={{ width: 200 }} />
+              <img src={maxto} className="img-fluid" style={{ width: 200 }} alt="" />
             </div>
             <div className="col ">
-              <img src={billedtre} className="img-fluid" style={{ width: 200 }} />
+              <img src={billedtre} className="img-fluid" style={{ width: 200 }} alt="" />
             </div>
           </div>
           <div className="d-grid">
