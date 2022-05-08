@@ -20,8 +20,11 @@ function ShowMessages() {
     });
 
     useEffect(() => {
-        const unsubscribe = createSnapshotHandler(setDataList);
-    }, []);
+        createSnapshotHandler(setDataList).then((u)=>{
+            setUnsubscribe(u);
+        })
+
+    }, [setUnsubscribe]);
 
     return (
         <>
