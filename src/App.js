@@ -45,9 +45,7 @@ let AuthContext = createContext({ user: undefined, setUser: undefined });
 
 
 function RequireAuth(inner) {
-  const location = useLocation();
-
-  
+  const location = useLocation();  
 
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
@@ -203,8 +201,13 @@ function Logud() {
     navigate("/forside");
   };
 
-  logout(callback);
-  //context();
+  
+
+  useEffect(() => {
+    console.log("Vi logger permanent ud...");
+    //context(); // vi unsubscriber til snapshot Listener for at fejlbesked fra firebase.
+    //logout(callback);
+  }, []);
 
 }
 

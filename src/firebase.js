@@ -89,7 +89,7 @@ const authProvider = {
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
     (res) => {
-      console.log("Vi er signed in.");
+      console.log("Vi er logget ind med email og password.");
     }
   );
 }
@@ -125,14 +125,15 @@ async function createMessage(message, author) {
   }
 }
 
-async function createSnapshotHandler(dataList, setDataList, setContext) {
+async function createSnapshotHandler(setDataList) {
+  console.log("Vi opretter snapshotListener...");
 
   const messages = collection(db, "messages");
   const q = query(messages, orderBy('createdAt', 'desc'));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
-      //docs.push(doc.data().name);
+      console.log("Vi konverterer data til passende format.");
       docs.push({
         id: doc.id,
         message: doc.data().message,
@@ -142,7 +143,7 @@ async function createSnapshotHandler(dataList, setDataList, setContext) {
     });
     setDataList(docs);    
   });
-  //setContext(unsubscribe);
+  return unsubscribe;
 }
 
 async function getMessages(dataList, setDataList) {
