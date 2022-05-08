@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Context } from "./Context.js";
+import { UnsubscribeContext } from "./Context.js";
 
 function Logud() {
-    const [context, setContext] = React.useContext(Context);
+    const [context, setContext] = React.useContext(UnsubscribeContext);
     const navigate = useNavigate();  
 
     React.useEffect(() => {

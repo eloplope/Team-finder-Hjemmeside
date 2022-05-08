@@ -24,7 +24,7 @@ import Logud from './Logud';
 import Profil from './Profil';
 import './App.css';
 import './styles.css';
-import { Context } from "./Context.js";
+import { UnsubscribeContext } from "./Context.js";
 import { AuthContext } from "./Context.js";
 
 
@@ -55,11 +55,11 @@ function AuthProvider(inner) {
   }, []);
 
 
-  return <Context.Provider value={[context, setContext]}>
+  return <UnsubscribeContext.Provider value={[context, setContext]}>
     <AuthContext.Provider value={{ user, setUser }}>
       {inner.children}
     </AuthContext.Provider>
-  </Context.Provider>;
+  </UnsubscribeContext.Provider>;
 }
 
 

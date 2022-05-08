@@ -146,7 +146,7 @@ async function createSnapshotHandler(setDataList) {
   return unsubscribe;
 }
 
-async function getMessages(dataList, setDataList) {
+async function getMessages(setDataList) {
   try {
     const messages = collection(db, "messages");
     const q = query(messages, limit(10), orderBy('createdAt', 'desc'));
