@@ -61,20 +61,31 @@ function convertTimestamp(timestamp) {
   }
 }
 
+const authProvider = {
+  isAuthenticated: false,
+  uid: "",
+  user: {},
+  setUser: null,
+  firebaseSetup: function (user, setUser) {
+    if (authProvider.isAuthenticated === false) {
+      this.isAuthenticated = true;
+      onAuthStateChanged(auth, res => {
+        if (res) {
+          this.user = res;
+          this.uid = res.uid;
+          this.setUser = setUser;
+          setUser(res);
+          console.log("Så er vi logget ind.", res.displayName)
+        }
+        else {
+          setUser(null);
+        }
+      });
+    }
+  }
+};
 
-async function firebaseSetup(user, setUser) {
-  onAuthStateChanged(auth, res => {
-    console.log("onAuthStateChanged kaldes nu.");
-    if (res) {
-      setUser(res);
-      console.log("Så er vi logget ind.", res.displayName)
-    }
-    else {
-      console.log("Noget gik galt da vi loggede ind.");
-      //setUser(null);
-    }
-  });
-}
+
 
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
@@ -163,7 +174,7 @@ function logout() {
 }
 
 export {
-  firebaseSetup,
+  authProvider,
   google,
   facebook,
   twitter,

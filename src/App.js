@@ -17,7 +17,7 @@ import {
 import SignIn from './SignIn';
 import Recover from './Recover';
 import Forside from './Forside';
-import { firebaseSetup } from './firebase';
+import { authProvider } from './firebase';
 import Chat from './Chat';
 import Layout from './Layout';
 import Logud from './Logud';
@@ -50,7 +50,7 @@ function AuthProvider(inner) {
 
   useEffect(() => {
     console.log("Opsætter firebase...");
-    const unsubscribe = firebaseSetup(user, setUser);
+    const unsubscribe = authProvider.firebaseSetup(user, setUser);
   }, []);
 
 
