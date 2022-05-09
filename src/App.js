@@ -46,7 +46,7 @@ function AuthProvider(inner) {
   useEffect(() => {
     console.log("Opsætter firebase...");
     const unsubscribe = authProvider.firebaseSetup(user, setUser);
-    return (()=>{
+    return (() => {
       unsubscribe();
       console.log("Afsluttet brug af firebase...");
     });
