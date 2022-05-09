@@ -1,11 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { collection, addDoc, query, limit, orderBy, getDocs } from "firebase/firestore";
 import { where, onSnapshot } from "firebase/firestore";
 
 import {
+  getAuth,
+  signOut,
   FacebookAuthProvider,
   GoogleAuthProvider,
   TwitterAuthProvider,
@@ -14,8 +15,23 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+
+const firebaseConfigP = {
+  apiKey: "AIzaSyAoPgLuAFTqorFtDr3iEgyK9LrCXVFBrVc",
+  authDomain: "team-finder-dde6e.firebaseapp.com",
+  projectId: "team-finder-dde6e",
+  storageBucket: "team-finder-dde6e.appspot.com",
+  messagingSenderId: "841663490702",
+  appId: "1:841663490702:web:c22ad0b3cb6e0c745ef7df"
+};
+
+const app = initializeApp(firebaseConfigP);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyDWD9t0fcyx73fX8K6Gg3uEUrTJZ7TZj5U",
   authDomain: "team-finder-967e8.firebaseapp.com",
@@ -30,6 +46,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+*/
 
 function convertTimestamp(timestamp) {
   if (timestamp != null) {
@@ -45,34 +62,21 @@ function convertTimestamp(timestamp) {
 }
 
 const authProvider = {
-  isAuthenticated: false,
-  uid: "",
-  user: {},
-  setUser: null,
   firebaseSetup: function (user, setUser) {
-    if (authProvider.isAuthenticated === false) {
-      this.isAuthenticated = true;
-      onAuthStateChanged(auth, res => {
-        if (res) {
-          this.user = res;
-          this.uid = res.uid;
-          this.setUser = setUser;
-          setUser(res);
-          console.log("Så er vi logget ind.", res.displayName)
-        }
-        else {
-          setUser(null);
-        }
-      });
-    }
+    let unsubscribe = onAuthStateChanged(auth, fbUser => {
+      if (fbUser) {
+        setUser(fbUser);
+        console.log("Så er vi logget ind.", fbUser.displayName);
+      }
+    }, (e)=>{console.log("åh ååh")});
+    return unsubscribe;
   }
 };
-
 
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
     (res) => {
-      console.log("Vi er signed in.");
+      console.log("Vi er logget ind med email og password.");
     }
   );
 }
@@ -108,14 +112,14 @@ async function createMessage(message, author) {
   }
 }
 
-async function createSnapshotHandler(dataList, setDataList) {
+function createSnapshotHandler(setDataList) {
+  console.log("Vi opretter snapshotListener...");
 
   const messages = collection(db, "messages");
   const q = query(messages, orderBy('createdAt', 'desc'));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
-      //docs.push(doc.data().name);
       docs.push({
         id: doc.id,
         message: doc.data().message,
@@ -125,9 +129,10 @@ async function createSnapshotHandler(dataList, setDataList) {
     });
     setDataList(docs);
   });
+  return unsubscribe;
 }
 
-async function getMessages(dataList, setDataList) {
+async function getMessages(setDataList) {
   try {
     const messages = collection(db, "messages");
     const q = query(messages, limit(10), orderBy('createdAt', 'desc'));
@@ -146,6 +151,14 @@ async function getMessages(dataList, setDataList) {
 
 }
 
+function logout(user, setUser) {
+  signOut(auth).then(() => {
+    console.log("Vi er nu logget ud!");
+    setUser(null);
+  }).catch((error) => {
+    console.log("Noget gik galt da vi loggede ud.");
+  });
+}
 
 export {
   authProvider,
@@ -155,5 +168,6 @@ export {
   signIn,
   createMessage,
   getMessages,
-  createSnapshotHandler
+  createSnapshotHandler,
+  logout
 }

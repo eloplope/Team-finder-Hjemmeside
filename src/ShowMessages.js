@@ -1,9 +1,18 @@
 
-import { getMessages, createSnapshotHandler } from "./firebase";
+import { createSnapshotHandler } from "./firebase";
 import { useEffect, useState } from "react";
+
 
 function ShowMessages() {
     const [dataList, setDataList] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = createSnapshotHandler(setDataList);
+        return () => {
+            console.log("Cleaning up...");
+            unsubscribe();
+        };
+    }, []);
 
     const listItems = dataList.map((doc, index) => {
         return (
@@ -14,35 +23,25 @@ function ShowMessages() {
                 <td>{doc.createdAt}</td>
             </tr>
         );
-    }
-
-    );
-
-    useEffect(() => {
-        //getMessages(dataList, setDataList);
-        createSnapshotHandler(dataList, setDataList);
-    }, []);
+    });
 
     return (
         <>
-
             <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Message</th>
-                        <th>Created</th>
+                        <th>Forfatter</th>
+                        <th>Besked</th>
+                        <th>Tidspunkt</th>
                     </tr>
                 </thead>
                 <tbody>
                     {listItems}
                 </tbody>
             </table>
-
         </>
-
     );
-
 }
 
 export default ShowMessages;

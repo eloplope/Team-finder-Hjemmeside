@@ -1,12 +1,16 @@
 import { createMessage } from "./firebase";
-import { authProvider } from './firebase';
+import { AuthContext } from "./Context.js";
+import { useContext } from "react";
 
 function NewMessage() {
+    let { user, setUser } = useContext(AuthContext);
+
     function handleSubmit(event) {
         event.preventDefault();
         let formData = new FormData(event.currentTarget);
         let content = formData.get('content');
-        createMessage(content, authProvider.user.displayName);
+        createMessage(content, user.displayName);
+        event.target.reset();
     }
 
     return (
