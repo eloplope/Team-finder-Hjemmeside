@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.f71554fd.css",
-    "main.js": "/static/js/main.d7511bed.js",
-    "static/js/787.ccb28b1b.chunk.js": "/static/js/787.ccb28b1b.chunk.js",
-    "static/media/Davidto.jpg": "/static/media/Davidto.5346b8ee6dca50f5e25f.jpg",
-    "static/media/Davidtre.png": "/static/media/Davidtre.a8536b86acc2b5f0ecce.png",
-    "static/media/maxto.jpg": "/static/media/maxto.e22b91986e556cabbf9a.jpg",
-    "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
-    "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
-    "static/media/controoler.png": "/static/media/controoler.828782fa1f61a1e4a92f.png",
-    "static/media/jatak.png": "/static/media/jatak.d7b48b812e6b3f33ac2a.png",
-    "static/media/chaat.png": "/static/media/chaat.0a2c9e306922ae2fb47c.png",
-    "static/media/teamlogo.png": "/static/media/teamlogo.de0383574e34309ad4a9.png",
-    "static/media/nejtak.png": "/static/media/nejtak.f9c703c8f616142640e0.png",
-    "static/media/profilimg.png": "/static/media/profilimg.e663ad5614672491730c.png",
-    "index.html": "/index.html",
-    "main.f71554fd.css.map": "/static/css/main.f71554fd.css.map",
-    "main.d7511bed.js.map": "/static/js/main.d7511bed.js.map",
-    "787.ccb28b1b.chunk.js.map": "/static/js/787.ccb28b1b.chunk.js.map"
+    "main.css": "/Team-finder-hjemmeside/static/css/main.e25d7344.css",
+    "main.js": "/Team-finder-hjemmeside/static/js/main.1b90d910.js",
+    "static/js/787.ccb28b1b.chunk.js": "/Team-finder-hjemmeside/static/js/787.ccb28b1b.chunk.js",
+    "static/media/Davidto.jpg": "/Team-finder-hjemmeside/static/media/Davidto.5346b8ee6dca50f5e25f.jpg",
+    "static/media/Davidtre.png": "/Team-finder-hjemmeside/static/media/Davidtre.a8536b86acc2b5f0ecce.png",
+    "static/media/maxto.jpg": "/Team-finder-hjemmeside/static/media/maxto.e22b91986e556cabbf9a.jpg",
+    "static/media/bootstrap-icons.woff?": "/Team-finder-hjemmeside/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
+    "static/media/bootstrap-icons.woff2?": "/Team-finder-hjemmeside/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
+    "static/media/controoler.png": "/Team-finder-hjemmeside/static/media/controoler.828782fa1f61a1e4a92f.png",
+    "static/media/jatak.png": "/Team-finder-hjemmeside/static/media/jatak.d7b48b812e6b3f33ac2a.png",
+    "static/media/chaat.png": "/Team-finder-hjemmeside/static/media/chaat.0a2c9e306922ae2fb47c.png",
+    "static/media/teamlogo.png": "/Team-finder-hjemmeside/static/media/teamlogo.de0383574e34309ad4a9.png",
+    "static/media/nejtak.png": "/Team-finder-hjemmeside/static/media/nejtak.f9c703c8f616142640e0.png",
+    "static/media/profilimg.png": "/Team-finder-hjemmeside/static/media/profilimg.e663ad5614672491730c.png",
+    "index.html": "/Team-finder-hjemmeside/index.html",
+    "main.e25d7344.css.map": "/Team-finder-hjemmeside/static/css/main.e25d7344.css.map",
+    "main.1b90d910.js.map": "/Team-finder-hjemmeside/static/js/main.1b90d910.js.map",
+    "787.ccb28b1b.chunk.js.map": "/Team-finder-hjemmeside/static/js/787.ccb28b1b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f71554fd.css",
-    "static/js/main.d7511bed.js"
+    "static/css/main.e25d7344.css",
+    "static/js/main.1b90d910.js"
   ]
 }
