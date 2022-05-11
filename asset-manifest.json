@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/eloplope.github.io/Team-finder-Hjemmeside/static/css/main.e20f8448.css",
-    "main.js": "/eloplope.github.io/Team-finder-Hjemmeside/static/js/main.6ca0dacc.js",
-    "static/js/787.ccb28b1b.chunk.js": "/eloplope.github.io/Team-finder-Hjemmeside/static/js/787.ccb28b1b.chunk.js",
-    "static/media/Davidto.jpg": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/Davidto.5346b8ee6dca50f5e25f.jpg",
-    "static/media/Davidtre.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/Davidtre.a8536b86acc2b5f0ecce.png",
-    "static/media/maxto.jpg": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/maxto.e22b91986e556cabbf9a.jpg",
-    "static/media/bootstrap-icons.woff?": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
-    "static/media/bootstrap-icons.woff2?": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
-    "static/media/jatak.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/jatak.d7b48b812e6b3f33ac2a.png",
-    "static/media/teamlogo.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/teamlogo.de0383574e34309ad4a9.png",
-    "static/media/nejtak.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/nejtak.f9c703c8f616142640e0.png",
-    "static/media/controolerlilla.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/controolerlilla.3d23463b9684f4cd7a28.png",
-    "static/media/profilimg.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/profilimg.4ff7bca2bc88446620ea.png",
-    "static/media/chaatlilla.png": "/eloplope.github.io/Team-finder-Hjemmeside/static/media/chaatlilla.5b1b0ddba1634da3f60b.png",
-    "index.html": "/eloplope.github.io/Team-finder-Hjemmeside/index.html",
-    "main.e20f8448.css.map": "/eloplope.github.io/Team-finder-Hjemmeside/static/css/main.e20f8448.css.map",
-    "main.6ca0dacc.js.map": "/eloplope.github.io/Team-finder-Hjemmeside/static/js/main.6ca0dacc.js.map",
-    "787.ccb28b1b.chunk.js.map": "/eloplope.github.io/Team-finder-Hjemmeside/static/js/787.ccb28b1b.chunk.js.map"
+    "main.css": "/Team-finder-Hjemmeside/static/css/main.bacd6bf1.css",
+    "main.js": "/Team-finder-Hjemmeside/static/js/main.8b986ed5.js",
+    "static/js/787.ccb28b1b.chunk.js": "/Team-finder-Hjemmeside/static/js/787.ccb28b1b.chunk.js",
+    "static/media/Davidto.jpg": "/Team-finder-Hjemmeside/static/media/Davidto.5346b8ee6dca50f5e25f.jpg",
+    "static/media/Davidtre.png": "/Team-finder-Hjemmeside/static/media/Davidtre.a8536b86acc2b5f0ecce.png",
+    "static/media/maxto.jpg": "/Team-finder-Hjemmeside/static/media/maxto.e22b91986e556cabbf9a.jpg",
+    "static/media/bootstrap-icons.woff?": "/Team-finder-Hjemmeside/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
+    "static/media/bootstrap-icons.woff2?": "/Team-finder-Hjemmeside/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
+    "static/media/jatak.png": "/Team-finder-Hjemmeside/static/media/jatak.d7b48b812e6b3f33ac2a.png",
+    "static/media/teamlogo.png": "/Team-finder-Hjemmeside/static/media/teamlogo.de0383574e34309ad4a9.png",
+    "static/media/nejtak.png": "/Team-finder-Hjemmeside/static/media/nejtak.f9c703c8f616142640e0.png",
+    "static/media/controolerlilla.png": "/Team-finder-Hjemmeside/static/media/controolerlilla.3d23463b9684f4cd7a28.png",
+    "static/media/profilimg.png": "/Team-finder-Hjemmeside/static/media/profilimg.4ff7bca2bc88446620ea.png",
+    "static/media/chaatlilla.png": "/Team-finder-Hjemmeside/static/media/chaatlilla.5b1b0ddba1634da3f60b.png",
+    "index.html": "/Team-finder-Hjemmeside/index.html",
+    "main.bacd6bf1.css.map": "/Team-finder-Hjemmeside/static/css/main.bacd6bf1.css.map",
+    "main.8b986ed5.js.map": "/Team-finder-Hjemmeside/static/js/main.8b986ed5.js.map",
+    "787.ccb28b1b.chunk.js.map": "/Team-finder-Hjemmeside/static/js/787.ccb28b1b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e20f8448.css",
-    "static/js/main.6ca0dacc.js"
+    "static/css/main.bacd6bf1.css",
+    "static/js/main.8b986ed5.js"
   ]
 }
