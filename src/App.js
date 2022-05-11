@@ -29,12 +29,12 @@ function RequireAuth(inner) {
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
 
-  if (user === null && location.pathname != '/signin') {
-    return <Navigate to="/signin" />;
+  if (user === null && location.pathname != '/Team-finder-Hjemmeside/signin') {
+    return <Navigate to="/Team-finder-Hjemmeside/signin" />;
   }
-  if (user !== null && location.pathname == '/signin') {
+  if (user !== null && location.pathname == '/Team-finder-Hjemmeside/signin') {
     // console.log("vi er på vej til signin og er logget ind. Videresend til dashboard.");
-    return <Navigate to="/" />;
+    return <Navigate to="/Team-finder-Hjemmeside/" />;
   }
 
   return inner.children;
@@ -60,7 +60,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path="Team-finder-Hjemmeside/*" element={<Layout />}>
+        <Route path="/Team-finder-Hjemmeside/" element={<Layout />}>
           <Route path="" element={<Forside />} />
           <Route path="signin" element={<RequireAuth><SignIn /></RequireAuth>} />
           <Route path="recover" element={<Recover />} />
@@ -69,7 +69,7 @@ function App() {
           <Route path="favoritter" element={<RequireAuth><Favoritter /></RequireAuth>} />
           <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
           <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
-          <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
+          <Route path="*/" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
         </Route>
       </Routes>
     </AuthContext.Provider>

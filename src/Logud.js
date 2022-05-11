@@ -10,7 +10,7 @@ function Logud() {
 
 
     useEffect(() => {
-        navigate('/');        
+        navigate('/Team-finder-Hjemmeside/');
         logout(user, setUser);
     });
 
