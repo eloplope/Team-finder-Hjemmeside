@@ -1,7 +1,7 @@
 
-import logo2 from './chaatlilla.png';
-import logo3 from './controolerlilla.png';
-import logo4 from './profilimg.png';
+import logo2 from './billeder/chaatlilla.png';
+import logo3 from './billeder/controolerlilla.png';
+import logo4 from './billeder/profilimg.png';
 
 import { Link } from "react-router-dom";
 

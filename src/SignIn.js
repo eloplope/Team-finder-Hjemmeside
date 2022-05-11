@@ -1,5 +1,5 @@
 import SignInForm from "./SignInForm";
-import {google, facebook, twitter} from "./firebase";
+import { google, facebook, twitter } from "./firebase";
 
 
 function SignIn(props) {

@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     console.log("Opsætter firebase...");
-    
+
     const unsubscribe = firebaseSetup(user, setUser);
     return unsubscribe;
     /*
@@ -60,7 +60,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path="/*" element={<Layout />}>
+        <Route path="Team-finder-Hjemmeside/*" element={<Layout />}>
           <Route path="" element={<Forside />} />
           <Route path="signin" element={<RequireAuth><SignIn /></RequireAuth>} />
           <Route path="recover" element={<Recover />} />

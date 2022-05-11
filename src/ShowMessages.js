@@ -22,7 +22,7 @@ function ShowMessages() {
             <tr key={doc.id}>
                 <td>{index + 1}</td>
                 <td>{doc.author}<br></br>
-                <img src={doc.photoURL} style={{ width: 100 }} />
+                    <img src={doc.photoURL} style={{ width: 100 }} />
                 </td>
                 <td>{doc.message} </td>
                 <td>{doc.createdAt}</td>
@@ -31,7 +31,7 @@ function ShowMessages() {
     });
 
     return (
-        <>            
+        <>
             <table className="table table-hover">
                 <thead>
                     <tr>
