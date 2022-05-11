@@ -8,9 +8,7 @@ import { Link } from "react-router-dom";
 function Forside() {
   return (
     <>
-      <div className="text-center">
-        <h1>Vælg hvad du vil</h1>
-      </div>
+      <h1>Vælg hvad du vil</h1>
       <div className="row text-center">
         <div className="col">
           <Link to="/chat">

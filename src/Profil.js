@@ -83,40 +83,6 @@ function Profil() {
                     <div className="d-grid">
                         <button className="btn btn-primary" type="button">Skift billeder</button>
                     </div>
-                    <br></br>
-                    <h2>Vælg dine yndlingsspil</h2>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                        <label className="form-check-label" >League of Legends</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                        <label className="form-check-label">Counter Strike</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" />
-                        <label className="form-check-label">Valorant</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" />
-                        <label className="form-check-label" >Fortnite</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" />
-                        <label className="form-check-label">Rocket League</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox6" value="option2" />
-                        <label className="form-check-label">World of Warcraft</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox7" value="option2" />
-                        <label className="form-check-label">Battlefield 2042</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox8" value="option2" />
-                        <label className="form-check-label">Call of Duty</label>
-                    </div>
                 </div>
             </div>
         </>

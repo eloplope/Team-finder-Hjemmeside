@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
 import { collection, addDoc, query, limit, orderBy, getDocs } from "firebase/firestore";
-import { where, onSnapshot } from "firebase/firestore";
+import { where, onSnapshot, doc, getDoc, setDoc } from "firebase/firestore";
 
 import {
   getAuth,
@@ -13,8 +13,10 @@ import {
   signInWithRedirect,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  getRedirectResult
 } from "firebase/auth";
 
+let unsubscribeOnAuthStateChanged;
 /*
 const firebaseConfigP = {
   apiKey: "AIzaSyAoPgLuAFTqorFtDr3iEgyK9LrCXVFBrVc",
@@ -27,8 +29,7 @@ const firebaseConfigP = {
 
 const app = initializeApp(firebaseConfigP);
 const db = getFirestore(app);
-const auth = getAuth(app);
-*/
+const auth = getAuth(app);*/
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -62,17 +63,42 @@ function convertTimestamp(timestamp) {
   }
 }
 
-const authProvider = {
-  firebaseSetup: function (user, setUser) {
-    let unsubscribe = onAuthStateChanged(auth, fbUser => {
-      if (fbUser) {
-        setUser(fbUser);
-        console.log("Så er vi logget ind.", fbUser.displayName);
-      }
-    }, (e) => { console.log("åh ååh") });
-    return unsubscribe;
+function firebaseSetup(user, setUser) {
+  let unsubscribe = onAuthStateChanged(auth, fbUser => {
+    if (fbUser) {
+      setUser(fbUser);
+      console.log("onAuthStateChanged: Så er vi logget ind.", fbUser.displayName);
+    }
+    else {
+      console.log("onAuthStateChanged: Vi er logget ud.");
+      setUser(null);
+    }
+  }, (e) => { console.log("onAuthStateChanged: Der opstod en fejl!") });
+  unsubscribeOnAuthStateChanged = unsubscribe;
+  return unsubscribe;
+}
+
+
+async function getFavorites(uid) {
+  const docRef = doc(db, "favorites", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return (docSnap.data());
+    //setUser(prevState => ({ ...user, favoritter: docSnap.data() }));
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("Ingen favoritter");
+    return (undefined);
+    //setUser(prevState => ([...user, {favoritter: docSnap.data()} ]));
   }
-};
+}
+
+async function createFavorite(f, uid) {
+  console.log("Vi er ved at gemme favorit-spil...", f);
+  await setDoc(doc(db, "favorites", uid), f);
+}
+
 
 async function signIn(email, password) {
   signInWithEmailAndPassword(auth, email, password).then(
@@ -99,12 +125,13 @@ async function twitter() {
   await signInWithRedirect(auth, provider);
 }
 
-async function createMessage(message, author) {
+async function createMessage(message, author, photoURL) {
   try {
     const timestamp = serverTimestamp();
     const docRef = await addDoc(collection(db, "messages"), {
       message: message,
       author: author,
+      photoURL: photoURL,
       createdAt: timestamp
     });
     console.log("Et dokument blev skrevet til db. Dokumentet har id: ", docRef.id);
@@ -117,7 +144,7 @@ function createSnapshotHandler(setDataList) {
   console.log("Vi opretter snapshotListener...");
 
   const messages = collection(db, "messages");
-  const q = query(messages, orderBy('createdAt', 'desc'));
+  const q = query(messages, orderBy('createdAt', 'desc'), limit(10));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = [];
     querySnapshot.forEach((doc) => {
@@ -125,6 +152,7 @@ function createSnapshotHandler(setDataList) {
         id: doc.id,
         message: doc.data().message,
         author: doc.data().author,
+        photoURL: doc.data().photoURL,
         createdAt: convertTimestamp(doc.data().createdAt)
       });
     });
@@ -153,16 +181,17 @@ async function getMessages(setDataList) {
 }
 
 function logout(user, setUser) {
-  signOut(auth).then(() => {
-    console.log("Vi er nu logget ud!");
-    setUser(null);
+  /*
+  signOut(auth).then((res) => {
+    console.log("Vi er nu logget ud af firebase!");
   }).catch((error) => {
-    console.log("Noget gik galt da vi loggede ud.");
+    console.log("Noget gik galt da vi loggede ud af firebase.");
   });
+  */
 }
 
 export {
-  authProvider,
+  firebaseSetup,
   google,
   facebook,
   twitter,
@@ -170,5 +199,7 @@ export {
   createMessage,
   getMessages,
   createSnapshotHandler,
-  logout
+  logout,
+  createFavorite,
+  getFavorites,
 }

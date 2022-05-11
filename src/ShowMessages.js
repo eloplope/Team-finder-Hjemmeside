@@ -1,10 +1,13 @@
 
 import { createSnapshotHandler } from "./firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "./Context.js";
+
 
 
 function ShowMessages() {
     const [dataList, setDataList] = useState([]);
+    let { user, setUser } = useContext(AuthContext);
 
     useEffect(() => {
         const unsubscribe = createSnapshotHandler(setDataList);
@@ -18,7 +21,9 @@ function ShowMessages() {
         return (
             <tr key={doc.id}>
                 <td>{index + 1}</td>
-                <td>{doc.author} </td>
+                <td>{doc.author}<br></br>
+                <img src={doc.photoURL} style={{ width: 100 }} />
+                </td>
                 <td>{doc.message} </td>
                 <td>{doc.createdAt}</td>
             </tr>
@@ -26,7 +31,7 @@ function ShowMessages() {
     });
 
     return (
-        <>
+        <>            
             <table className="table table-hover">
                 <thead>
                     <tr>

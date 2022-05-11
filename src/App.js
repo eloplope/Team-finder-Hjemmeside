@@ -11,12 +11,13 @@ import {
 import SignIn from './SignIn';
 import Recover from './Recover';
 import Forside from './Forside';
-import { authProvider } from './firebase';
+import { firebaseSetup } from './firebase';
 import Chat from './Chat';
 import Layout from './Layout';
 import Logud from './Logud';
 import Profil from './Profil';
 import PageThree from './PageThree';
+import Favoritter from './Favoritter';
 import './App.css';
 import './styles.css';
 import { AuthContext } from "./Context.js";
@@ -28,40 +29,36 @@ function RequireAuth(inner) {
   let { user, setUser } = useContext(AuthContext);
   //console.log("Vi er i RequireAuth!", location.pathname, user);
 
-  if (user == null && location.pathname != '/signin') {
-    return <Navigate to="/signin" replace />;
+  if (user === null && location.pathname != '/signin') {
+    return <Navigate to="/signin" />;
   }
-  if (user != null && location.pathname == '/signin') {
+  if (user !== null && location.pathname == '/signin') {
     // console.log("vi er på vej til signin og er logget ind. Videresend til dashboard.");
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" />;
   }
 
   return inner.children;
 }
 
-function AuthProvider(inner) {
+function App() {
 
-  let [user, setUser] = useState();
+  let [user, setUser] = useState(null);
 
   useEffect(() => {
     console.log("Opsætter firebase...");
-    const unsubscribe = authProvider.firebaseSetup(user, setUser);
-    return (() => {
+    
+    const unsubscribe = firebaseSetup(user, setUser);
+    return unsubscribe;
+    /*
+    return (()=>{
       unsubscribe();
       console.log("Afsluttet brug af firebase...");
     });
+    */
   }, []);
 
-
-  return <AuthContext.Provider value={{ user, setUser }}>
-    {inner.children}
-  </AuthContext.Provider>;
-}
-
-
-function App() {
   return (
-    <AuthProvider>
+    <AuthContext.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/*" element={<Layout />}>
           <Route path="" element={<Forside />} />
@@ -69,15 +66,14 @@ function App() {
           <Route path="recover" element={<Recover />} />
           <Route path="logud" element={<Logud />} />
           <Route path="chat" element={<RequireAuth><Chat /></RequireAuth>} />
+          <Route path="favoritter" element={<RequireAuth><Favoritter /></RequireAuth>} />
           <Route path="pagethree" element={<RequireAuth><PageThree /></RequireAuth>} />
           <Route path="profil" element={<RequireAuth><Profil /></RequireAuth>} />
           <Route path="*" element={<div><h1>404!</h1><p>Ikke meget at se her :-).</p></div>}></Route>
         </Route>
       </Routes>
-    </AuthProvider>
+    </AuthContext.Provider>
   );
 }
-
-
 
 export default App;

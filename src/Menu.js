@@ -17,6 +17,7 @@ function Menu() {
             <Nav>
               <LinkContainer to="/"><Nav.Link>Menu</Nav.Link></LinkContainer>
               <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
+              <LinkContainer to="/favoritter"><Nav.Link>Favoritter</Nav.Link></LinkContainer>
               <LinkContainer to="/pagethree"><Nav.Link>Finder</Nav.Link></LinkContainer>
               <LinkContainer to="/profil"><Nav.Link>Profil</Nav.Link></LinkContainer>
               <LinkContainer to="/logud"><Nav.Link>Log ud</Nav.Link></LinkContainer>

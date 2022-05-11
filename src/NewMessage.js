@@ -9,7 +9,9 @@ function NewMessage() {
         event.preventDefault();
         let formData = new FormData(event.currentTarget);
         let content = formData.get('content');
-        createMessage(content, user.displayName);
+        if (content != "") {
+            createMessage(content, user.displayName, user.photoURL);
+        }
         event.target.reset();
     }
 

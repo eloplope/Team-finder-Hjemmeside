@@ -1,10 +1,7 @@
 .btn-xxl {
-    background-color: rgb(166, 5, 155);
     font-size: 3rem;
     padding: 1rem 1.5rem;
 }
-
-
 
 .btn-forsideet {
     background-color: purple;
@@ -19,4 +16,3 @@
 .navItem {
     color: rgb(132, 15, 15);
 }
-
