@@ -29,8 +29,8 @@ const firebaseConfigP = {
 
 const app = initializeApp(firebaseConfigP);
 const db = getFirestore(app);
-const auth = getAuth(app);*/
-
+const auth = getAuth(app);
+*/
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -181,13 +181,13 @@ async function getMessages(setDataList) {
 }
 
 function logout(user, setUser) {
-  /*
+
   signOut(auth).then((res) => {
     console.log("Vi er nu logget ud af firebase!");
   }).catch((error) => {
     console.log("Noget gik galt da vi loggede ud af firebase.");
   });
-  */
+
 }
 
 export {

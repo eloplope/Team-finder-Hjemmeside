@@ -14,8 +14,11 @@
 } 
 
 .form-check-input{
-  background-color: rgb(255, 79, 236) !important;
+  /*background-color: rgb(255, 79, 236) !important;*/
+    border-color: #FF6F61 !important;
+
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
