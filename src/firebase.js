@@ -17,7 +17,7 @@ import {
 } from "firebase/auth";
 
 let unsubscribeOnAuthStateChanged;
-/*
+
 const firebaseConfigP = {
   apiKey: "AIzaSyAoPgLuAFTqorFtDr3iEgyK9LrCXVFBrVc",
   authDomain: "team-finder-dde6e.firebaseapp.com",
@@ -30,11 +30,11 @@ const firebaseConfigP = {
 const app = initializeApp(firebaseConfigP);
 const db = getFirestore(app);
 const auth = getAuth(app);
-*/
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyDWD9t0fcyx73fX8K6Gg3uEUrTJZ7TZj5U",
   authDomain: "team-finder-967e8.firebaseapp.com",
   projectId: "team-finder-967e8",
@@ -47,7 +47,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
+const auth = getAuth(app);*/
 
 
 function convertTimestamp(timestamp) {
